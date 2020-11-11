@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create A New Timer"
+        android:id="@+id/createTimerLabel"
+        app:layout_constraintBottom_toTopOf="@id/nameLabel"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name:"
+        android:textSize="24sp"
+        android:id="@+id/nameLabel"
+        app:layout_constraintTop_toBottomOf="@id/createTimerLabel"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/nameEdit"
+        app:layout_constraintBottom_toTopOf="@id/durationLabel"
+        android:layout_margin="20dp"
+      />
+
+    <EditText
+        android:id="@+id/nameEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/nameLabel"
+        app:layout_constraintBottom_toBottomOf="@id/nameLabel"
+        app:layout_constraintTop_toTopOf="@id/nameLabel"
+        android:layout_margin="20dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Duration:"
+        android:textSize="24sp"
+        android:id="@+id/durationLabel"
+        app:layout_constraintTop_toBottomOf="@id/nameLabel"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/repeatLabel"
+        android:layout_margin="20dp"
+        />
+
+    <EditText
+        android:id="@+id/durationEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/durationLabel"
+        app:layout_constraintBottom_toBottomOf="@id/durationLabel"
+        app:layout_constraintTop_toTopOf="@id/durationLabel"
+        android:layout_margin="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Repeat:"
+        android:textSize="24sp"
+        android:id="@+id/repeatLabel"
+        app:layout_constraintTop_toBottomOf="@id/durationLabel"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/notificationLabel"
+        android:layout_margin="20dp"
+        />
+
+    <TextView
+        android:id="@+id/repeatSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Never"
+        android:textColor="#1188ff"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/notificationLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/repeatLabel"
+        app:layout_constraintTop_toBottomOf="@id/durationLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notification:"
+        android:textSize="24sp"
+        android:id="@+id/notificationLabel"
+        app:layout_constraintTop_toBottomOf="@id/repeatLabel"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/soundLabel"
+        android:layout_margin="20dp"
+        />
+
+    <TextView
+        android:id="@+id/notificationSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="At Time of Event"
+        android:textColor="#1188ff"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/soundLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/notificationLabel"
+        app:layout_constraintTop_toBottomOf="@id/repeatLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sound:"
+        android:textSize="24sp"
+        android:id="@+id/soundLabel"
+        app:layout_constraintTop_toBottomOf="@id/notificationLabel"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/submitButton"
+        android:layout_margin="20dp"
+        />
+
+    <TextView
+        android:id="@+id/soundSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Chime"
+        android:textColor="#1188ff"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/submitButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/soundLabel"
+        app:layout_constraintTop_toBottomOf="@id/notificationLabel" />
+
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/soundLabel"
+        android:text="Create Timer"
+        android:onClick="createTimer"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
