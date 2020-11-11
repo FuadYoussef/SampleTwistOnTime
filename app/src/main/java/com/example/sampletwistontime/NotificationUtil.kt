@@ -18,7 +18,7 @@ class NotificationUtil {
         private const val CHANNEL_NAME_TIMER = "Timer App Timer"
         private const val TIMER_ID = 0
 
-        fun showTimerExpired(context: Context) {
+        fun timerFinished(context: Context) {
             val startIntent = Intent(context, TimerNotificationActionReceiver::class.java)
             startIntent.action = AppConstants.ACTION_START
             val startPendingIntent = PendingIntent.getBroadcast(context,0,startIntent,PendingIntent.FLAG_UPDATE_CURRENT)
@@ -34,7 +34,7 @@ class NotificationUtil {
         }
 
 
-        fun showTimerRunning(context: Context, wakeUpTime: Long) {
+        fun timerRunning(context: Context, wakeUpTime: Long) {
             val stopIntent = Intent(context, TimerNotificationActionReceiver::class.java)
             stopIntent.action = AppConstants.ACTION_STOP
             val stopPendingIntent = PendingIntent.getBroadcast(context,
@@ -59,15 +59,15 @@ class NotificationUtil {
         }
 
 
-        fun showTimerPaused(context: Context){
+        fun timerPaused(context: Context){
             val resumeIntent = Intent(context, TimerNotificationActionReceiver::class.java)
             resumeIntent.action = AppConstants.ACTION_RESUME
             val resumePendingIntent = PendingIntent.getBroadcast(context,
                     0, resumeIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
             val nBuilder = getBasicNotificationBuilder(context, CHANNEL_ID_TIMER, false)
-            nBuilder.setContentTitle("Timer is paused.")
-                    .setContentText("Resume?")
+            nBuilder.setContentTitle("Timer Paused.")
+                    .setContentText("Press Resume")
                     .setContentIntent(getPendingIntentWithStack(context, TimerActivity::class.java))
                     .setOngoing(true)
                     .addAction(R.drawable.ic_timer, "Resume", resumePendingIntent)
@@ -105,14 +105,12 @@ class NotificationUtil {
 
         @TargetApi(26)
         private fun NotificationManager.createNotificationChannel(channelId: String, channelName : String, playSound: Boolean) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val channelImportance = if (playSound) NotificationManager.IMPORTANCE_HIGH
-                else NotificationManager.IMPORTANCE_LOW
-                val nChannel = NotificationChannel(channelId, channelName, channelImportance)
-                nChannel.enableLights(true)
-                nChannel.lightColor = Color.BLUE
-                this.createNotificationChannel(nChannel)
-            }
+            val channelImportance = if (playSound) NotificationManager.IMPORTANCE_HIGH
+            else NotificationManager.IMPORTANCE_LOW
+            val nChannel = NotificationChannel(channelId, channelName, channelImportance)
+            nChannel.enableLights(true)
+            nChannel.lightColor = Color.BLUE
+            this.createNotificationChannel(nChannel)
         }
 
     }

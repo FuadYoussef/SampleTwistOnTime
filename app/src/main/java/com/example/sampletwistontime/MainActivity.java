@@ -15,6 +15,11 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity {
+    /** References:
+     * for learning how to create a timer that can run in the background: https://www.youtube.com/watch?v=xtElLuzjA0U
+     * for learning how to parse JSON data: https://medium.com/@nayantala259/android-how-to-read-and-write-parse-data-from-json-file-226f821e957a
+     * general documentation: https://developer.android.com/docs
+     **/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

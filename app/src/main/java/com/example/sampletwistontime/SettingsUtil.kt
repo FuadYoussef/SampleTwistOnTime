@@ -6,9 +6,9 @@ import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
 
-class PrefUtil {
+class SettingsUtil {
     companion object {
-        fun getTimerLength(context: Context):String{
+        fun getTimerStringFromFile(context: Context):String{
             val file = File(context.filesDir, "timersettings.txt")
             val fileReader = FileReader(file)
             val bufferedReader = BufferedReader(fileReader)
@@ -62,16 +62,16 @@ class PrefUtil {
             editor.apply()
         }
 
-        private const val ALARM_SET_TIME_ID = "com.example.sampletwistontime.backgrounded_time"
+        private const val TIMER_SET_TIME_ID = "com.example.sampletwistontime.backgrounded_time"
 
-        fun getAlarmSetTime(context: Context):Long{
+        fun getTimerSetTime(context: Context):Long{
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-            return preferences.getLong(ALARM_SET_TIME_ID, 0)
+            return preferences.getLong(TIMER_SET_TIME_ID, 0)
         }
 
-        fun setAlarmSetTime(time: Long, context: Context) {
+        fun setTimerSetTime(time: Long, context: Context) {
             val editor = PreferenceManager.getDefaultSharedPreferences(context).edit()
-            editor.putLong(ALARM_SET_TIME_ID, time)
+            editor.putLong(TIMER_SET_TIME_ID, time)
             editor.apply()
 
         }

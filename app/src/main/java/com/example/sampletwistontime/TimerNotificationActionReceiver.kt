@@ -3,7 +3,6 @@ package com.example.sampletwistontime
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import kotlinx.android.synthetic.main.activity_timer.*
 import org.json.JSONObject
 
 class TimerNotificationActionReceiver : BroadcastReceiver() {
@@ -12,37 +11,37 @@ class TimerNotificationActionReceiver : BroadcastReceiver() {
         // This method is called when the BroadcastReceiver is receiving an Intent broadcast.
         when(intent.action) {
             AppConstants.ACTION_STOP -> {
-                TimerActivity.removeAlarm(context)
-                PrefUtil.setTimerState(TimerActivity.TimerState.Stopped, context)
+                TimerActivity.clearTimer(context)
+                SettingsUtil.setTimerState(TimerActivity.TimerState.Stopped, context)
                 NotificationUtil.hideTimerNotification(context)
             }
             AppConstants.ACTION_PAUSE -> {
-                var secondsRemaining = PrefUtil.getSecondsRemaining(context)
-                val alarmSetTime = PrefUtil.getAlarmSetTime(context)
-                val nowSeconds = TimerActivity.nowSeconds
+                var secondsRemaining = SettingsUtil.getSecondsRemaining(context)
+                val alarmSetTime = SettingsUtil.getTimerSetTime(context)
+                val nowSeconds = TimerActivity.currTime
 
                 secondsRemaining -= nowSeconds - alarmSetTime
-                PrefUtil.setSecondsRemaining(secondsRemaining, context)
+                SettingsUtil.setSecondsRemaining(secondsRemaining, context)
 
-                TimerActivity.removeAlarm(context)
-                PrefUtil.setTimerState(TimerActivity.TimerState.Paused, context)
-                NotificationUtil.showTimerPaused(context)
+                TimerActivity.clearTimer(context)
+                SettingsUtil.setTimerState(TimerActivity.TimerState.Paused, context)
+                NotificationUtil.timerPaused(context)
             }
             AppConstants.ACTION_RESUME -> {
-                var secondsRemaining = PrefUtil.getSecondsRemaining(context)
-                val wakeUpTime = TimerActivity.setAlarm(context, TimerActivity.nowSeconds, secondsRemaining)
-                PrefUtil.setTimerState(TimerActivity.TimerState.Running, context)
-                NotificationUtil.showTimerRunning(context, wakeUpTime)
+                var secondsRemaining = SettingsUtil.getSecondsRemaining(context)
+                val wakeUpTime = TimerActivity.setTimer(context, TimerActivity.currTime, secondsRemaining)
+                SettingsUtil.setTimerState(TimerActivity.TimerState.Running, context)
+                NotificationUtil.timerRunning(context, wakeUpTime)
             }
             AppConstants.ACTION_START -> {
-                var jsonObject = JSONObject(PrefUtil.getTimerLength(context))
+                var jsonObject = JSONObject(SettingsUtil.getTimerStringFromFile(context))
                 val minutesRemaining = Integer.parseInt(jsonObject.get("Duration").toString())
                 //val minutesRemaining = PrefUtil.getTimerLength(context)
                 val secondsRemaining = minutesRemaining * 60L
-                val wakeUpTime = TimerActivity.setAlarm(context, TimerActivity.nowSeconds, secondsRemaining)
-                PrefUtil.setTimerState(TimerActivity.TimerState.Running, context)
-                PrefUtil.setSecondsRemaining(secondsRemaining, context)
-                NotificationUtil.showTimerRunning(context, wakeUpTime)
+                val wakeUpTime = TimerActivity.setTimer(context, TimerActivity.currTime, secondsRemaining)
+                SettingsUtil.setTimerState(TimerActivity.TimerState.Running, context)
+                SettingsUtil.setSecondsRemaining(secondsRemaining, context)
+                NotificationUtil.timerRunning(context, wakeUpTime)
             }
         }
 
